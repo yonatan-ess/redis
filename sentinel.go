@@ -184,6 +184,7 @@ func NewFailoverClient(failoverOpt *FailoverOptions) *Client {
 	sentinelAddrs := make([]string, len(failoverOpt.SentinelAddrs))
 	copy(sentinelAddrs, failoverOpt.SentinelAddrs)
 
+	rand.Seed(int64(time.Now().UnixNano()))
 	rand.Shuffle(len(sentinelAddrs), func(i, j int) {
 		sentinelAddrs[i], sentinelAddrs[j] = sentinelAddrs[j], sentinelAddrs[i]
 	})
